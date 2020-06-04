@@ -1,0 +1,110 @@
+#map {
+   border: 2px solid black;
+   border-color: aqua;
+   bottom: 10px;
+   margin: auto;
+   min-width: 200px;
+   min-height: 200px;
+}
+
+.geocoder {
+   position: absolute;
+   z-index: 21;
+   width: 200px;
+   left: 50px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   height: 46px;
+   bottom: 235px;
+}
+
+.mapboxgl-ctrl-geocoder {
+   min-width: 100%;
+   border-radius: 24px;
+}
+
+.geoloc {
+   position: absolute;
+   bottom: 100px;
+   right: 45px;
+   width: 30px;
+   height: 45px;
+}
+
+.mapboxgl-ctrl.mapboxgl-ctrl-group {
+   border-radius: 180px;
+}
+
+.mapboxgl-ctrl-geocoder--input {
+   height: 25px;
+}
+
+.mapboxgl-ctrl-geocoder--icon-search {
+   top: 2px
+}
+
+.mapboxgl-ctrl-geocoder--icon-close {
+   margin-top: 0px;
+}
+
+.mapboxgl-ctrl-geocoder .mapboxgl-ctrl-geocoder--pin-right > * {
+   top: 1px;
+}
+
+
+.btn-circle {
+   width: 29px;
+   height:29px;
+   text-align: center;
+   border-radius: 15px;
+   position:absolute; 
+   z-index:25; 
+   border: 2px ridge rgba(0, 0, 0, 0.2);
+   background-image: url('../../../media/icons/btn-layer_reg.png');
+   background-color: #fff;
+   cursor: pointer;
+
+   bottom: 150px;
+   right: 45px;
+ }
+
+.btn-circle2 {
+   text-align: center;
+   border-radius: 15px;
+   position:absolute; 
+   z-index:26; 
+   border: 2px ridge rgba(0, 0, 0, 0.2);
+   background-image: url('../../../media/icons/3d_button_reg.png');
+   background-color: #fff;
+   cursor: pointer;
+
+   bottom: 185px;
+   right: 45px;
+ }
+
+.btn-lg {
+   width: 34px;
+   height: 34px;
+   border-radius: 25px;
+   cursor: pointer;
+}
+
+.btn-group-lg>.btn, .btn-lg {
+    padding: .5rem 0.5rem;
+ }
+.btn-circle:not(:disabled):not(.disabled):active  { 
+   background-image: url('../../../media/icons/btn-layer_reg_clicked.png');
+ }
+
+ .btn-circle2:not(:disabled):not(.disabled):active  { 
+   background-image: url('../../../media/icons/3d_button_reg_clicked.png');
+ }
+
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
+   background-color: rgb(238, 237, 237);
+ }
+
+.mapboxgl-ctrl button:not(:disabled):hover {
+   border-radius: 90px;
+}

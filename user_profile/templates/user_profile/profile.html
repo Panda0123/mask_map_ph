@@ -1,0 +1,76 @@
+{% extends "map_app/base.html" %}
+{% load crispy_forms_tags %} <!--allow us to use cripsy filters-->
+{% load static %}
+{% block content %}
+<script src='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js"></script>
+
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
+<link
+   rel="stylesheet"
+   href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css"
+   type="text/css"
+/>
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+{{ p_form.media }}
+<br>
+<br>
+<br>
+<div class="content-section">
+   <div class="media">
+   <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+   <div class="media-body">
+      <h2 class="account-heading">{{ user.username }}</h2>
+      <p class="text-secondary">{{ user.email }}</p>
+   </div>
+   </div>
+   <!-- FORM HERE -->
+   <form method="POST" enctype='multipart/form-data'>
+      {% csrf_token %} <!--to add some security in the form-->
+      <fieldset class='form-group'>
+         <legend class='border-bottom mb-4'>Profile Info</legend>
+         {{ u_form.username| as_crispy_field }}
+         {{ u_form.email| as_crispy_field }}
+         {{ u_form.first_name| as_crispy_field }}
+         {{ u_form.last_name| as_crispy_field }}
+         <br>
+         <legend class='border-bottom mb-4'>About your store</legend>
+         {{ p_form.store_name| as_crispy_field }}
+         {{ p_form.country| as_crispy_field }}
+         {{ p_form.address| as_crispy_field }}
+         {{ p_form.contact_num| as_crispy_field }}
+         <h3 style="margin-bottom:0rem;font-size:1.3rem">Price Range</h3>
+         <p style="font-size:80%; color: rgb(106, 105, 103);">If you have different kind of masks set the price range. From the cheapest to most expensive one. If only one product/price set both max and min to that price.</p>
+         {{ p_form.min_price| as_crispy_field }}
+         {{ p_form.max_price| as_crispy_field }}
+         {{ p_form.quantity| as_crispy_field }}
+         {{ p_form.time_open| as_crispy_field }}
+         {{ p_form.time_close| as_crispy_field }}
+         <h3 style="margin-bottom:0rem;font-size:1.3rem">Store Location</h3>
+         <p style="font-size:80%; color:rgb(106, 105, 103)">Set the exact location of your store. Set the longitude and latitude so it can easily be tracked by your buyer.</p>
+         {{ p_form.coor_long| as_crispy_field }}
+         {{ p_form.coor_lat| as_crispy_field }}
+         
+      </fieldset>
+      <!-- MAP -->
+      <div class='cont-map'>
+         <div id='map'></div>
+         <div id="geocoder" class="geocoder"></div>
+         <div id='geoloc' class='geoloc'></div>
+         <button  id='btn_layer' type="button" class="btn btn-default btn-circle btn-lg"></button>
+         <button  id='btn_3d' type="button" class="btn btn-default btn-circle2 btn-lg"></button>
+      </div>
+
+      <div class='from-group'>
+         <button class='btn btn-outline-info', type='submit'>Update</button>
+      </div>
+   </form>
+   <link rel="stylesheet" href="{% static 'user_profile/profile.css' %}">
+   {{ info|json_script:"data" }}
+   <script id="data" type="application/json"></script>
+   <script src="{% static 'user_profile/profile.js' %}"></script>
+ </div>
+{% endblock content %}

@@ -1,0 +1,113 @@
+{% extends "map_app/base.html" %} <!--Extending the base html-->
+{% load static %}
+{% block content_map %}
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+
+<script src='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js"></script>
+
+
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
+{{ lt_user|json_script:"data" }}
+{{ is_logged_in|json_script:"data2" }}
+{{ logged_in_username|json_script:"data3" }}
+<script id="data" type="application/json"></script>
+<script id="data2" type="application/json"></script>
+<script id="data3" type="application/json"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'map_app/map.css' %}">
+<link
+   rel="stylesheet"
+   href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css"
+   type="text/css"
+/>
+
+<!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
+
+
+<div id="map"></div>
+<div id="geocoder" class="geocoder"></div>
+<div id='geoloc' class='geoloc'></div>
+<button  id='btn_layer' type="button" class="btn btn-default btn-circle btn-lg"></button>
+<button  id='btn_3d' type="button" class="btn btn-default btn-circle2 btn-lg"></button>
+
+<div  class='info_cont' id='info_cont'>
+   <div class='info_header'>
+      <div class='title' id='id_title'>Mercury Drugstore</div>
+      <button data-close-btn class='info_close_btn'>&times;</button>
+   </div>
+   <div class='info_body'>
+      <div class='info_section'>
+         <span class='key' style="margin-right: 24px;">Quantity</span>
+         <span style="position: relative; top: -1px;margin-right: 5px;">|</span>
+         <span style="    margin-right: 10px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            font-size: 19;
+            line-height: 1.18;
+            letter-spacing: normal;
+            text-align: left;
+         color: #000000;" id='id_quant'>100</span>
+         <span id='id_avail' style='font-size: 10px;
+            position: relative;
+            top: -1px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.23;
+            letter-spacing: normal;
+            text-align: left;
+         color: rgb(100, 175, 111);'>Available</span>
+      </div>
+
+      <div class='info_section'>
+         <span class='key' style="margin-right: 7px; font-size: 1.10rem;">Price /mask</span>
+         <span style="position: relative; top: -1px;margin-right: 5px;">|</span>
+         <span style="margin-right: 10px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.18;
+            letter-spacing: normal;
+            text-align: left;
+         color: #000000;" id='id_price'>555-555 Php</span>
+      </div>
+
+      <div class='info_section'>
+         <span class='key' style="margin-right: 7px; font-size: 1.10rem; color:#a0a0a0">Contact No.</span>
+         <span style="position: relative; top: -1px;margin-right: 5px; color:#a0a0a0">|</span>
+         <span style="    margin-right: 10px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.18;
+            letter-spacing: normal;
+            text-align: left;
+            font-size: 12px;
+         color: #a0a0a0;" id='id_contact'>+639770157314</span>
+      </div>
+
+      <div class='info_section'>
+         <span class='key' style="margin-right: 62px; font-size: 1.10rem; color:#a0a0a0;">Open</span>
+         <span style="position: relative; top: -1px;margin-right: 5px; color:#a0a0a0;">|</span>
+         <span style="margin-right: 0px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.18;
+            letter-spacing: normal;
+            text-align: left;
+            font-size: 12px;
+         color: #a0a0a0;" id='id_time'>12:00 A.M - 12:00 P.M</span>
+      </div>
+   
+   <div id='info_notif_loc' class='info_notif_loc'></div>
+   <div class='info_dir_btn' id='dir_btn'>Get Direction</div>
+      
+   </div>
+</div>
+<div id='overlay'></div>
+<div class="cred_to">Design: Jamsed Cabili</div>
+
+<script src="{% static 'map_app/map.js' %}" ></script>
+{% endblock content_map %}
